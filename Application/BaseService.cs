@@ -3,7 +3,7 @@ using System;
 
 namespace API.Application
 {
-    class BaseService : IDisposable
+    public class BaseService : IDisposable
     {
         private readonly IUnitOfWork _uow;
         public BaseService(IUnitOfWork uow)

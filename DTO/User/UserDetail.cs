@@ -1,13 +1,12 @@
 using System;
-using System.Collections.Generic;
-using API.DTO;
-namespace API.Domain
+using API.Domain;
+
+namespace API.DTO
 {
-    public class User
+    public class UserDetailDTO
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
     }
 }

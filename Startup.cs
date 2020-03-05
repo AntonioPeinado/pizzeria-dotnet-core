@@ -21,12 +21,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.Add(
-                new ServiceDescriptor(typeof(IUserService), typeof(UserService), ServiceLifetime.Scoped)
-            );
-            services.Add(
-               new ServiceDescriptor(typeof(IUserContext), typeof(PizzeriaContext), ServiceLifetime.Scoped)
-            );
+            ContainerSetup.Setup(services);
             services.AddDbContext<PizzeriaContext>(opt =>
                opt.UseSqlServer(Configuration.GetConnectionString("Pizzeria"))
             );

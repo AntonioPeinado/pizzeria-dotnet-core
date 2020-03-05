@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using API.Domain;
+using API.Infraestructure;
+
+namespace API.Application
+{
+    public class PizzaIngredientService : IPizzaIngredientService
+    {
+        private readonly PizzeriaContext _context;
+
+        private readonly IIngredientService _ingredientService;
+
+        public PizzaIngredientService(PizzeriaContext context, IIngredientService ingredientService)
+        {
+            _context = context;
+            _ingredientService = ingredientService;
+        }
+        public void AddIngredients(Pizza pizza, ICollection<Guid> ingredients)
+        {
+            foreach (Guid ingredientId in ingredients)
+            {
+                var ingredient = _ingredientService.FindById(ingredientId);
+                var pizzaIngredient = new PizzaIngredient()
+                {
+                    Pizza = pizza,
+                    PizzaId = pizza.Id,
+                    Ingredient = ingredient,
+                    IngredientId = ingredient.Id
+                };
+                pizza.PizzaIngredients.Add(pizzaIngredient);
+            }
+        }
+    }
+}
